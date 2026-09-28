@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0b0b">
+<title>STYLISH | تواصل معنا</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap');
+
+:root{
+    --bg:#0b0b0b;
+    --card:#141414;
+    --border:#262626;
+    --text:#f5f5f5;
+    --muted:#8d8d8d;
+    --accent:#d4b98c;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    min-height:100%;
+}
+
+body{
+    font-family:'Cairo',system-ui,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 50% -20%, #1f1f1f, transparent 55%),
+        var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding:
+        max(20px, env(safe-area-inset-top))
+        20px
+        max(20px, env(safe-area-inset-bottom));
+}
+
+.wrap{
+    width:100%;
+    max-width:380px;
+    text-align:center;
+}
+
+/* ===== BRAND ===== */
+
+.logo{
+    font-size:46px;
+    font-weight:800;
+    letter-spacing:10px;
+    padding-right:10px;
+    color:var(--text);
+}
+
+.line{
+    width:46px;
+    height:2px;
+    background:var(--accent);
+    margin:14px auto 12px;
+    border-radius:2px;
+}
+
+.sub{
+    color:var(--muted);
+    font-size:14px;
+    margin-bottom:34px;
+}
+
+/* ===== LINKS ===== */
+
+.links{
+    display:grid;
+    gap:12px;
+}
+
+.card{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    width:100%;
+    padding:14px 16px;
+    text-decoration:none;
+    color:var(--text);
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    font-family:inherit;
+    font-size:inherit;
+    cursor:pointer;
+    text-align:inherit;
+    transition:transform .18s ease, border-color .18s ease;
+    will-change:transform;
+}
+
+.card:hover{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+}
+
+.card:active{
+    transform:scale(.97);
+}
+
+.icon{
+    width:46px;
+    height:46px;
+    flex:0 0 46px;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:#1d1d1d;
+    color:var(--accent);
+}
+
+.icon svg{
+    width:23px;
+    height:23px;
+    fill:currentColor;
+}
+
+.info{
+    flex:1;
+    text-align:right;
+}
+
+.name{
+    font-size:17px;
+    font-weight:700;
+}
+
+.desc{
+    font-size:12px;
+    color:var(--muted);
+    margin-top:1px;
+}
+
+.desc.num{
+    direction:ltr;
+    text-align:right;
+    font-size:13px;
+    letter-spacing:1px;
+}
+
+.arrow{
+    color:var(--muted);
+    font-size:18px;
+}
+
+.footer{
+    margin-top:30px;
+    font-size:11px;
+    color:#555;
+    letter-spacing:2px;
+}
+
+/* ===== POPUP (SHEET) ===== */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .2s ease, visibility .2s ease;
+    z-index:50;
+}
+
+.overlay.open{
+    opacity:1;
+    visibility:visible;
+}
+
+.sheet{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-bottom:none;
+    border-radius:24px 24px 0 0;
+    padding:
+        12px 18px
+        max(20px, env(safe-area-inset-bottom));
+    transform:translateY(100%);
+    transition:transform .25s ease;
+    text-align:center;
+}
+
+.overlay.open .sheet{
+    transform:translateY(0);
+}
+
+.grip{
+    width:38px;
+    height:4px;
+    background:#333;
+    border-radius:4px;
+    margin:0 auto 16px;
+}
+
+.sheet h3{
+    font-size:18px;
+    font-weight:800;
+}
+
+.sheet .hint{
+    font-size:12px;
+    color:var(--muted);
+    margin:4px 0 16px;
+}
+
+.sheet .hint b{
+    direction:ltr;
+    unicode-bidi:embed;
+    letter-spacing:1px;
+    font-weight:600;
+    color:var(--text);
+}
+
+.options{
+    display:grid;
+    gap:10px;
+}
+
+.cancel{
+    justify-content:center;
+    margin-top:10px;
+    background:transparent;
+    color:var(--muted);
+    font-weight:600;
+    font-size:15px;
+    padding:12px;
+}
+
+.cancel:hover{
+    transform:none;
+    border-color:var(--border);
+}
+
+@media (prefers-reduced-motion:reduce){
+    .card, .overlay, .sheet{transition:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+    <div class="logo">STYLISH</div>
+    <div class="line"></div>
+    <p class="sub">تابعنا على السوشيال ميديا</p>
+
+    <main class="links">
+
+        <!-- FACEBOOK -->
+        <a class="card"
+           href="https://www.facebook.com/share/1CdsULF2qF/?mibextid=wwXIfr"
+           target="_blank" rel="noopener noreferrer">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M13.5 22v-8.2h2.8l.5-3.3h-3.3V8.4c0-.95.4-1.7 1.8-1.7h1.6V3.8c-.3 0-1.3-.2-2.4-.2-2.5 0-4.1 1.5-4.1 4.2v2.7H7.6v3.3h2.8V22h3.1z"/>
+                </svg>
+            </div>
+            <div class="info">
+                <div class="name">Facebook</div>
+                <div class="desc">صفحتنا على فيسبوك</div>
+            </div>
+            <div class="arrow">←</div>
+        </a>
+
+        <!-- INSTAGRAM -->
+        <a class="card"
+           href="https://www.instagram.com/stylish_shoes113?stkn=MXJxYmZ4MHdrbjNjNw%3D%3D&utm_source=qr"
+           target="_blank" rel="noopener noreferrer">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2z"/>
+                    <circle cx="17.2" cy="6.8" r="1.1"/>
+                    <path d="M16.5 2h-9A5.5 5.5 0 0 0 2 7.5v9A5.5 5.5 0 0 0 7.5 22h9a5.5 5.5 0 0 0 5.5-5.5v-9A5.5 5.5 0 0 0 16.5 2zm3.8 14.5a3.8 3.8 0 0 1-3.8 3.8h-9a3.8 3.8 0 0 1-3.8-3.8v-9a3.8 3.8 0 0 1 3.8-3.8h9a3.8 3.8 0 0 1 3.8 3.8z"/>
+                </svg>
+            </div>
+            <div class="info">
+                <div class="name">Instagram</div>
+                <div class="desc">@stylish_shoes113</div>
+            </div>
+            <div class="arrow">←</div>
+        </a>
+
+        <!-- TIKTOK -->
+        <a class="card"
+           href="https://www.tiktok.com/@stylish_shoes6"
+           target="_blank" rel="noopener noreferrer">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M16.6 2h-3.2v13.2a2.9 2.9 0 1 1-2-2.76V9.1a6.1 6.1 0 1 0 5.2 6.04V8.7a7.4 7.4 0 0 0 4.3 1.38V6.9a4.3 4.3 0 0 1-4.3-4.3V2z"/>
+                </svg>
+            </div>
+            <div class="info">
+                <div class="name">TikTok</div>
+                <div class="desc">@stylish_shoes6</div>
+            </div>
+            <div class="arrow">←</div>
+        </a>
+
+        <!-- CUSTOMER SERVICE (opens popup) -->
+        <button class="card" id="openContact" type="button">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/>
+                </svg>
+            </div>
+            <div class="info">
+                <div class="name">خدمة العملاء</div>
+                <div class="desc num">01067796750</div>
+            </div>
+            <div class="arrow">←</div>
+        </button>
+
+    </main>
+
+    <div class="footer"</div>
+
+</div>
+
+<!-- POPUP -->
+<div class="overlay" id="overlay" aria-hidden="true">
+    <div class="sheet" role="dialog" aria-modal="true" aria-label="خدمة العملاء">
+
+        <div class="grip"></div>
+        <h3>خدمة العملاء</h3>
+        <p class="hint">اختار الطريقة اللي تناسبك — <b>01067796750</b></p>
+
+        <div class="options">
+
+            <!-- WHATSAPP -->
+            <a class="card"
+               href="https://wa.me/201067796750"
+               target="_blank" rel="noopener noreferrer">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12.04 2a9.9 9.9 0 0 0-8.43 15.1L2 22l5.05-1.32A9.9 9.9 0 1 0 12.04 2zm0 18.1c-1.5 0-2.97-.4-4.25-1.16l-.3-.18-3 .78.8-2.92-.2-.31a8.1 8.1 0 1 1 6.95 3.79zm4.45-6.06c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.55.12-.16.24-.63.79-.77.95-.14.16-.28.18-.53.06-.24-.12-1.03-.38-1.96-1.21-.72-.65-1.21-1.45-1.35-1.69-.14-.24-.02-.37.1-.5.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.32-.75-1.8-.2-.47-.4-.41-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.51.58.18 1.1.16 1.52.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z"/>
+                    </svg>
+                </div>
+                <div class="info">
+                    <div class="name">واتساب</div>
+                    <div class="desc">ابعتلنا رسالة دلوقتي</div>
+                </div>
+                <div class="arrow">←</div>
+            </a>
+
+            <!-- CALL -->
+            <a class="card" href="tel:01067796750">
+                <div class="icon">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.6 21 3 13.4 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/>
+                    </svg>
+                </div>
+                <div class="info">
+                    <div class="name">اتصال عادي</div>
+                    <div class="desc">كلمنا من جهات الاتصال</div>
+                </div>
+                <div class="arrow">←</div>
+            </a>
+
+        </div>
+
+        <button class="card cancel" id="closeContact" type="button">إلغاء</button>
+
+    </div>
+</div>
+
+<script>
+/* صوت الضغط - بيتولد بالكود، خفيف ومفيهوش ملفات */
+(function(){
+    let ctx = null;
+
+    function getCtx(){
+        if(!ctx){
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if(AC) ctx = new AC();
+        }
+        if(ctx && ctx.state === "suspended") ctx.resume();
+        return ctx;
+    }
+
+    function click(){
+        try{
+            const c = getCtx();
+            if(!c) return;
+
+            const t = c.currentTime;
+            const osc = c.createOscillator();
+            const gain = c.createGain();
+
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(880, t);
+            osc.frequency.exponentialRampToValueAtTime(520, t + 0.09);
+
+            gain.gain.setValueAtTime(0.0001, t);
+            gain.gain.exponentialRampToValueAtTime(0.12, t + 0.01);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.12);
+
+            osc.connect(gain);
+            gain.connect(c.destination);
+
+            osc.start(t);
+            osc.stop(t + 0.13);
+        }catch(e){}
+    }
+
+    document.querySelectorAll(".card").forEach(function(el){
+        el.addEventListener("pointerdown", click, {passive:true});
+    });
+
+    /* ===== POPUP ===== */
+    const overlay = document.getElementById("overlay");
+    const openBtn = document.getElementById("openContact");
+    const closeBtn = document.getElementById("closeContact");
+
+    function openSheet(){
+        overlay.classList.add("open");
+        overlay.setAttribute("aria-hidden","false");
+        history.pushState({sheet:1}, "");
+    }
+
+    function closeSheet(fromPop){
+        if(!overlay.classList.contains("open")) return;
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden","true");
+        if(!fromPop && history.state && history.state.sheet){
+            history.back();
+        }
+    }
+
+    openBtn.addEventListener("click", openSheet);
+    closeBtn.addEventListener("click", function(){ closeSheet(false); });
+
+    overlay.addEventListener("click", function(e){
+        if(e.target === overlay) closeSheet(false);
+    });
+
+    window.addEventListener("popstate", function(){ closeSheet(true); });
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape") closeSheet(false);
+    });
+})();
+</script>
+
+</body>
+</html>
